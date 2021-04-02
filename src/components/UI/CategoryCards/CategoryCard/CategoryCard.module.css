@@ -1,0 +1,13 @@
+.CategoryCard img {
+  height: 300px;
+  width: 400px;
+  object-fit: cover;
+  box-shadow: 1px -1px 5px 3px rgba(0, 0, 0, 0.4);
+}
+
+.CategoryCard h3 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+

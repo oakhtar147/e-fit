@@ -1,0 +1,50 @@
+.QuantityButton {
+  cursor: pointer;
+  padding: 8px 20px;
+  font: inherit;
+  border: none;
+  margin: 8px;
+  font-weight: 700;
+  font-size: 1.5em;
+  background-color: rgb(196, 196, 196);
+  position: relative;
+  transition: all 0.4s ease-out;
+}
+
+.QuantityButton:focus {
+  outline: none;
+}
+
+.QuantityButton:hover {
+  top: 2px;
+}
+
+.QuantityButton:active {
+  box-shadow: none;
+  top: 4px;
+}
+
+.QuantityButton:disabled {
+  color: black;
+  background: #455a64;
+  cursor: not-allowed;
+  transform: scaleY(0.9);
+  box-shadow: 0 4px #263238;
+}
+
+.increment {
+  background: #9ccc65;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 4px #689f38;
+}
+
+.decrement {
+  background: #e53935;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+  font-size: 1.5em;
+  box-shadow: 0 4px #c62828;
+}
+
+

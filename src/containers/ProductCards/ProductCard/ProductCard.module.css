@@ -1,0 +1,35 @@
+.ProductCard {
+  border: 2px solid #777;
+  box-shadow: 1px -1px 5px 3px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  margin: 16px;
+}
+
+.ProductCard img {
+  object-fit: cover;  
+  width: 300px;
+  height: 250px;
+  box-shadow: 1px -1px 5px 3px rgba(0, 0, 0, 0.4);
+}
+
+.ProductCard h3 {
+  max-width: 100%;
+}
+
+.ProductCard Button {
+  float: right;
+}
+
+.ProductCard .quantity {
+  cursor: pointer;
+  padding: 10px;
+  font-size: 3em;
+}
+
+.ProductCard .decrement {
+  color: red;
+}
+
+.ProductCard .increment {
+  color: green;
+}

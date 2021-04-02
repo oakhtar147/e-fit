@@ -1,0 +1,21 @@
+.NavigationLink {
+  height: 100%;
+  padding: 12px 16px;
+  transition: all 0.2s linear;
+}
+
+.NavigationLink a {
+  display: inline-block;
+  height: 10px;
+  text-decoration: none;
+  color: white;
+  transition: all 0.2s ease-in;
+}
+
+.NavigationLink:hover {
+  border-bottom: 5px solid #F06418;
+}
+
+.NavigationLink .activeLink {
+  color: #F06418;
+}

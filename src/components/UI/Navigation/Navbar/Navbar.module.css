@@ -1,0 +1,14 @@
+.Navbar {
+  height: 50px;
+  background-color: black;
+}
+
+.Navbar ul {
+  height: 100%;
+  margin: 0;
+  list-style: none;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
