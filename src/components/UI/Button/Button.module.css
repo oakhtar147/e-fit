@@ -1,5 +1,5 @@
 .Button {
-  padding: 8px 25px;
+  padding: 12px 25px;
   border: none;
   outline: none;
   color: black;
@@ -7,6 +7,9 @@
   cursor: pointer;
   font: inherit;
   font-weight: 550;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 5px;
 }
 
 .success {
@@ -15,6 +18,7 @@
 
 .danger {
   background-color: rgb(189, 27, 27);
+  color: white;
 }
 
 .success:hover {

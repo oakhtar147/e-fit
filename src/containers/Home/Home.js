@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import styles from "./Home.module.css";
 import CategoryCards from "components/UI/CategoryCards/CategoryCards";
-import { clearProducts } from "store/actions/product";
+import { clearProducts } from "store/actions/";
 
 const Home = ({ clearProducts }) => {
   useEffect(() => {

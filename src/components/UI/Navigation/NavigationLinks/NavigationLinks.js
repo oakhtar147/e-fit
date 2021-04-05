@@ -6,7 +6,7 @@ const NavigationLinks = (props) => {
   return (
     <>
       <NavigationLink route="/">Home</NavigationLink>
-      <NavigationLink route="/orders">Orders</NavigationLink>
+      <NavigationLink route="/cart">My Cart</NavigationLink>
       <NavigationLink route="/auth">Sign in</NavigationLink>
     </>
   );

@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import styles from "./ProductCards.module.css";
 import ProductCard from "./ProductCard/ProductCard";
 import Spinner from "components/UI/Spinner/Spinner";
-import { clearPurchaseProduct, setProductsAsync } from "store/actions/product";
+import { clearPurchaseProduct, setProductsAsync } from "store/actions/";
 
 const ProductCards = (props) => {
   const { clearPurchaseProduct, setProducts, category } = props;
@@ -32,7 +32,7 @@ const ProductCards = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products,
+    products: state.products.products,
   };
 };
 

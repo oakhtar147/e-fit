@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   },
 };
 
-const productReducer = produce((draft, action) => {
+export const productReducer = produce((draft, action) => {
   switch (action.type) {
     case actionTypes.SET_PRODUCTS:
       draft.products = action.products;
@@ -38,9 +38,10 @@ const productReducer = produce((draft, action) => {
       draft.purchasingProduct.price =
         draft.purchasingProduct.quantity * action.productPrice;
       break;
+    case actionTypes.ADD_TO_CART:
+      draft.purchasingProduct.product = action.product.product;
+      break;
     default:
       return INITIAL_STATE;
   }
 }, INITIAL_STATE);
-
-export default productReducer;

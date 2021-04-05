@@ -11,9 +11,7 @@ const ProductCard = (props) => {
       <img src={product.image} alt={`${product.name}`} />
       <h3>{product.name}</h3>
       <p>Price: ${product.price}</p>
-      <p>Stock: {product.inStock ? "In Stock" : "Out of Stock"}</p>
-      {product.sizes && <span>Sizes: {product.sizes.join(" ")}</span>}
-
+      <p>{product.inStock ? "In Stock" : "Out of Stock"}</p>
       <Button
         variant="success"
         disabled={!product.inStock}

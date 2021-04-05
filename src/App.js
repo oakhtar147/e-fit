@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 
 import Home from "containers/Home/Home";
+import Cart from "containers/Cart/Cart";
 import Browse from "components/Browse/Browse";
 import PurchaseProduct from "containers/PurchaseProduct/PurchaseProduct";
 
@@ -14,6 +15,7 @@ const App = (props) => {
     <>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/cart" exact component={Cart} />
         <Route
           path="/products/footwear"
           exact

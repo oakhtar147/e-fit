@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { createStore, applyMiddleware, compose } from "redux";
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
@@ -10,24 +10,29 @@ import App from "./App";
 import Layout from "./hoc/Layout/Layout";
 import reportWebVitals from "./reportWebVitals";
 
-import productReducer from "./store/reducers/product";
+import { productReducer, cartReducer } from "store/reducers/";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const rootReducer = combineReducers({
+  products: productReducer,
+  cart: cartReducer,
+});
+
 const store = createStore(
-  productReducer,
+  rootReducer,
   composeEnhancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Layout>
-        <Provider store={store}>
+    <Provider store={store}>
+      <Router>
+        <Layout>
           <App />
-        </Provider>
-      </Layout>
-    </Router>
+        </Layout>
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

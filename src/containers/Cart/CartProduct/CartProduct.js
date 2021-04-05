@@ -1,0 +1,32 @@
+import React from "react";
+import { connect } from "react-redux";
+
+import styles from "./CartProduct.module.css";
+import Button from "components/UI/Button/Button";
+import { removeFromCartAsync } from "store/actions/";
+
+const CartProduct = ({ productDetails, removeFromCart }) => {
+  console.log(productDetails);
+  return (
+    <div className={styles.CartProduct}>
+      <img src={productDetails.product.image} alt="" />
+      <h3>Product: {productDetails.product.name}</h3>
+      <p>Total: ${productDetails.price.toFixed(2)}</p>
+      <p>Quantity: {productDetails.quantity}</p>
+      <Button
+        variant="danger"
+        onClick={() => removeFromCart(productDetails.productId)}
+      >
+        Cancel Order
+      </Button>
+    </div>
+  );
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeFromCart: (productId) => dispatch(removeFromCartAsync(productId)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CartProduct);

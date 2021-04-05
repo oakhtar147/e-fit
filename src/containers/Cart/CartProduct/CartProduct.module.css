@@ -1,0 +1,15 @@
+.CartProduct {
+  margin: 10px auto;
+  width: 80%;
+  height: 200px;
+  padding: 10px 16px;
+  border: 2px solid rgb(59, 59, 59);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.CartProduct img {
+  float: right;
+  width: 20%;
+  height: 100%;
+  object-fit: cover;
+}
