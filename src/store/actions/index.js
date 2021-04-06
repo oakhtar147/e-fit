@@ -8,3 +8,5 @@ export {
 } from "./product";
 
 export { populateCartAsync, addToCartAsync, removeFromCartAsync } from "./cart";
+
+export { userAuthAsync } from "./auth";

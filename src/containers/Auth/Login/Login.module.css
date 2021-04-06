@@ -1,0 +1,14 @@
+.Login Form {
+  text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+  min-width: 40%;
+  max-width: 45%;
+  margin: 0 auto;
+}
+
+.Login Button {
+  margin: 20px auto;
+  min-width: 30%;
+  /* max-width: 40%; */
+}

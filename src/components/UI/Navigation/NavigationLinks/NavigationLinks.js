@@ -7,7 +7,7 @@ const NavigationLinks = (props) => {
     <>
       <NavigationLink route="/">Home</NavigationLink>
       <NavigationLink route="/cart">My Cart</NavigationLink>
-      <NavigationLink route="/auth">Sign in</NavigationLink>
+      <NavigationLink route="/auth">Log in</NavigationLink>
     </>
   );
 };

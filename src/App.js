@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "containers/Home/Home";
 import Cart from "containers/Cart/Cart";
 import Browse from "components/Browse/Browse";
+import Login from "containers/Auth/Login/Login";
 import PurchaseProduct from "containers/PurchaseProduct/PurchaseProduct";
 
 const browseByCategory = (category) => {
@@ -16,6 +17,7 @@ const App = (props) => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/cart" exact component={Cart} />
+        <Route path="/auth" exact component={Login} />
         <Route
           path="/products/footwear"
           exact

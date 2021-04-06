@@ -10,13 +10,14 @@ import App from "./App";
 import Layout from "./hoc/Layout/Layout";
 import reportWebVitals from "./reportWebVitals";
 
-import { productReducer, cartReducer } from "store/reducers/";
+import { productReducer, cartReducer, authReducer } from "store/reducers/";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
   products: productReducer,
   cart: cartReducer,
+  auth: authReducer,
 });
 
 const store = createStore(

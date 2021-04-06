@@ -6,6 +6,7 @@ import Title from "components/UI/Title/Title";
 import CartProduct from "./CartProduct/CartProduct";
 import { populateCartAsync } from "store/actions/";
 import Spinner from "components/UI/Spinner/Spinner";
+import Button from "components/UI/Button/Button";
 
 const Cart = (props) => {
   const { populateCart, cartProducts } = props;
@@ -14,7 +15,7 @@ const Cart = (props) => {
     populateCart();
   }, [populateCart]);
 
-  const renderedProducts =
+  const products =
     props.cartProducts &&
     Object.keys(cartProducts).map((item) => (
       <CartProduct
@@ -23,10 +24,17 @@ const Cart = (props) => {
       />
     ));
 
+  const renderElements = products && (
+    <>
+      {products}
+      <Button variant="success">Checkout</Button>
+    </>
+  );
+
   return (
     <div className={styles.Cart}>
       <Title>My Cart</Title>
-      {renderedProducts || <Spinner />}
+      {renderElements || <Spinner />}
     </div>
   );
 };

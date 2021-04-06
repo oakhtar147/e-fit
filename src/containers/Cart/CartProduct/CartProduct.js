@@ -17,7 +17,7 @@ const CartProduct = ({ productDetails, removeFromCart }) => {
         variant="danger"
         onClick={() => removeFromCart(productDetails.productId)}
       >
-        Cancel Order
+        Remove
       </Button>
     </div>
   );
