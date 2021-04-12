@@ -11,3 +11,5 @@ export const POPULATE_CART = "POPULATE_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 
 export const USER_AUTH = "USER_AUTH";
+export const SET_AUTH_REDIRECT = "SET_AUTH_REDIRECT";
+export const USER_LOGOUT = "USER_LOGOUT";

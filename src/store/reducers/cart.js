@@ -14,7 +14,6 @@ export const cartReducer = produce((draft, action) => {
     case actionTypes.REMOVE_FROM_CART:
       delete draft.cartProducts[action.productId];
       break;
-    default:
-      return INITIAL_STATE;
+    // no default
   }
 }, INITIAL_STATE);

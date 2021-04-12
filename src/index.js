@@ -9,7 +9,6 @@ import "./index.css";
 import App from "./App";
 import Layout from "./hoc/Layout/Layout";
 import reportWebVitals from "./reportWebVitals";
-
 import { productReducer, cartReducer, authReducer } from "store/reducers/";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,7 +25,7 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <Provider store={store}>
       <Router>
         <Layout>
@@ -34,7 +33,7 @@ ReactDOM.render(
         </Layout>
       </Router>
     </Provider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById("root")
 );
 

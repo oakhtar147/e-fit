@@ -41,7 +41,6 @@ export const productReducer = produce((draft, action) => {
     case actionTypes.ADD_TO_CART:
       draft.purchasingProduct.product = action.product.product;
       break;
-    default:
-      return INITIAL_STATE;
+    // no default
   }
 }, INITIAL_STATE);

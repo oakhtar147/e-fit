@@ -9,4 +9,9 @@ export {
 
 export { populateCartAsync, addToCartAsync, removeFromCartAsync } from "./cart";
 
-export { userAuthAsync } from "./auth";
+export {
+  userAuthAsync,
+  userLogout,
+  setAuthRedirect,
+  authPersistence,
+} from "./auth";

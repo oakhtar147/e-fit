@@ -10,9 +10,13 @@ const populateCart = (cartProducts) => {
 };
 
 export const populateCartAsync = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
-      const { data: cartProducts } = await axios.get(`cart.json`);
+      const { idToken, localId: userId } = getState().auth;
+      const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`;
+      const { data: cartProducts } = await axios.get(
+        `cart.json/${queryParams}`
+      );
       dispatch(populateCart(cartProducts));
     } catch (err) {
       console.log(err);
@@ -28,9 +32,13 @@ const addToCart = (product) => {
 };
 
 export const addToCartAsync = (product) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
-      await axios.post("cart.json", product);
+      const { idToken, localId: userId } = getState().auth;
+      await axios.post(`cart.json?auth=${idToken}`, {
+        product,
+        userId,
+      });
       dispatch(addToCart(product));
     } catch (err) {
       console.log(err);
@@ -46,9 +54,10 @@ const removeFromCart = (productId) => {
 };
 
 export const removeFromCartAsync = (productId) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
-      await axios.delete(`cart/${productId}.json`);
+      const { idToken } = getState().auth;
+      await axios.delete(`cart/${productId}.json?auth=${idToken}`);
       dispatch(removeFromCart(productId));
     } catch (err) {
       console.log(err);

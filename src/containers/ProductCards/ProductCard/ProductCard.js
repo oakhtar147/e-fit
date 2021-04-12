@@ -1,10 +1,21 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import styles from "./ProductCard.module.css";
 import Button from "components/UI/Button/Button";
+import { setAuthRedirect } from "store/actions/";
 
 const ProductCard = (props) => {
-  const { product } = props;
+  const { isAuthenticated, product } = props;
+
+  const handleBuyProduct = () => {
+    if (!isAuthenticated) {
+      props.setAuthRedirect(`${props.match.url}/${product.id}`);
+      props.history.push({ pathname: "/auth", state: { redirected: true } });
+    } else {
+      props.history.push(`${props.match.url}/${product.id}`);
+    }
+  };
 
   return (
     <div className={styles.ProductCard}>
@@ -15,7 +26,7 @@ const ProductCard = (props) => {
       <Button
         variant="success"
         disabled={!product.inStock}
-        onClick={() => props.history.push(`${props.category}/${product.id}`)}
+        onClick={handleBuyProduct}
       >
         Buy
       </Button>
@@ -23,4 +34,17 @@ const ProductCard = (props) => {
   );
 };
 
-export default ProductCard;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.idToken !== null,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAuthRedirect: (purchaseProductRoute) =>
+      dispatch(setAuthRedirect(purchaseProductRoute)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

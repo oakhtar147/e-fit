@@ -2,10 +2,9 @@ import produce from "immer";
 import * as actionTypes from "store/actions/actionTypes";
 
 const INITIAL_STATE = {
-  isAuthenticated: false,
   idToken: null,
   localId: null,
-  expiresIn: 0,
+  authRedirect: "/",
 };
 
 export const authReducer = produce((draft, action) => {
@@ -13,10 +12,15 @@ export const authReducer = produce((draft, action) => {
     case actionTypes.USER_AUTH:
       draft.idToken = action.idToken;
       draft.localId = action.localId;
-      draft.expiresIn = action.expiresIn;
-      draft.isAuthenticated = true;
       break;
-    default:
-      return INITIAL_STATE;
+    case actionTypes.SET_AUTH_REDIRECT:
+      draft.authRedirect = action.route;
+      break;
+    case actionTypes.USER_LOGOUT:
+      draft.idToken = null;
+      draft.localId = null;
+      draft.authRedirect = "/";
+      break;
+    // no default
   }
 }, INITIAL_STATE);
