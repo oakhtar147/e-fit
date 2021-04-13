@@ -7,7 +7,12 @@ export {
   decrementProductQuantity,
 } from "./product";
 
-export { populateCartAsync, addToCartAsync, removeFromCartAsync } from "./cart";
+export {
+  populateCartAsync,
+  addToCartAsync,
+  removeFromCartAsync,
+  orderCartProductsAsync,
+} from "./cart";
 
 export {
   userAuthAsync,

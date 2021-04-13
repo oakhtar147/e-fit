@@ -56,9 +56,29 @@ const removeFromCart = (productId) => {
 export const removeFromCartAsync = (productId) => {
   return async (dispatch, getState) => {
     try {
-      const { idToken } = getState().auth;
-      await axios.delete(`cart/${productId}.json?auth=${idToken}`);
+      const { idToken, localId: userId } = getState().auth;
+      const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`;
+      await axios.delete(`cart/${productId}.json/${queryParams}`);
       dispatch(removeFromCart(productId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+const orderCartProducts = () => {
+  return {
+    type: actionTypes.ORDER_CART_PRODUCTS,
+  };
+};
+
+export const orderCartProductsAsync = () => {
+  return async (dispatch, getState) => {
+    const { idToken, localId: userId } = getState().auth;
+    const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`;
+    try {
+      await axios.delete(`cart.json/${queryParams}`);
+      dispatch(orderCartProducts());
     } catch (err) {
       console.log(err);
     }

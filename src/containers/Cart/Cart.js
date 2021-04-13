@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 import styles from "./Cart.module.css";
@@ -7,18 +7,15 @@ import CartProduct from "./CartProduct/CartProduct";
 import { populateCartAsync } from "store/actions/";
 import Spinner from "components/UI/Spinner/Spinner";
 import Button from "components/UI/Button/Button";
+import Checkout from "containers/Checkout/Checkout";
 
 const Cart = (props) => {
+  const [showCheckout, setShowCheckout] = useState(false);
   const { isAuthenticated, populateCart, cartProducts } = props;
 
   useEffect(() => {
     isAuthenticated && populateCart();
   }, [populateCart, isAuthenticated]);
-
-  const handleCheckoutRender = () => {
-    localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
-    props.history.push("/checkout");
-  };
 
   const products =
     cartProducts &&
@@ -34,7 +31,7 @@ const Cart = (props) => {
       {products}
       <Button
         variant="success"
-        onClick={handleCheckoutRender}
+        onClick={() => setShowCheckout(true)}
         disabled={!products.length}
       >
         {products.length ? "Checkout" : "Cart is Empty"}
@@ -52,6 +49,7 @@ const Cart = (props) => {
     <div className={styles.Cart}>
       <Title>My Cart</Title>
       {renderElements || <Spinner />}
+      {showCheckout && <Checkout />}
     </div>
   );
 };

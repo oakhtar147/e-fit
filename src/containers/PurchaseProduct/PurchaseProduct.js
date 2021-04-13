@@ -66,7 +66,7 @@ const PurchaseProduct = (props) => {
             Continue Shopping
           </Button>
           <Button variant="success" onClick={() => props.history.push(`/cart`)}>
-            Checkout
+            View Cart
           </Button>
         </>
       ) : (

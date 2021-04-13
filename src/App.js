@@ -6,7 +6,6 @@ import Home from "containers/Home/Home";
 import Cart from "containers/Cart/Cart";
 import Auth from "containers/Auth/Auth";
 import Browse from "components/Browse/Browse";
-import Checkout from "containers/Checkout/Checkout";
 import { authPersistence } from "store/actions/";
 import Logout from "containers/Auth/Logout/Logout";
 import PurchaseProduct from "containers/PurchaseProduct/PurchaseProduct";
@@ -29,9 +28,6 @@ const App = ({ isAuthenticated, tryAuthPersistence }) => {
         <Route path="/auth" exact component={Auth} />
         <Route path="/logout" exact component={Logout} />
         {isAuthenticated && <Route path="/cart" exact component={Cart} />}
-        {isAuthenticated && (
-          <Route path="/checkout" exact component={Checkout} />
-        )}
         <Route
           path="/products/footwear"
           exact
