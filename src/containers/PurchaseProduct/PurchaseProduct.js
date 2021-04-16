@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import FlashMessage from "react-flash-message";
+import axios from "axiosInstance";
 
 import styles from "./PurchaseProduct.module.css";
 import Spinner from "components/UI/Spinner/Spinner";
 import Title from "components/UI/Title/Title";
 import Button from "components/UI/Button/Button";
 import QuantityButton from "components/UI/Button/QuantityButton/QuantityButton";
+import withErrorHandler from "hoc/withErrorHandler/withErrorHandler";
 import {
   getProductAsync,
   incrementProductQuantity,
@@ -84,6 +86,7 @@ const PurchaseProduct = (props) => {
 const mapStateToProps = (state) => {
   return {
     productDetails: state.products.purchasingProduct,
+    error: state.products.error,
   };
 };
 
@@ -99,4 +102,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PurchaseProduct);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(PurchaseProduct, axios));

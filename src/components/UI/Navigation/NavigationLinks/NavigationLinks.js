@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import styles from "./NavigationLinks.module.css";
 import NavigationLink from "./NavigationLink/NavigationLink";
 
 const NavigationLinks = ({ isAuthenticated }) => {
@@ -12,13 +13,13 @@ const NavigationLinks = ({ isAuthenticated }) => {
   );
 
   return (
-    <>
+    <div className={styles.NavigationLinks}>
       <NavigationLink route="/">Home</NavigationLink>
       {isAuthenticated && (
         <NavigationLink route="/cart">My Cart</NavigationLink>
       )}
       {logInRoute || logOutRoute}
-    </>
+    </div>
   );
 };
 

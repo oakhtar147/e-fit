@@ -3,15 +3,16 @@ import { connect } from "react-redux";
 
 import styles from "./Home.module.css";
 import CategoryCards from "components/UI/CategoryCards/CategoryCards";
-import { clearProducts } from "store/actions/";
+import { clearProducts, clearCart } from "store/actions/";
 
 const Home = (props) => {
-  const { clearProducts } = props;
+  const { clearProducts, clearCart } = props;
   const { pathname, hash: id } = props.location;
 
   useEffect(() => {
     clearProducts();
-  }, [clearProducts]);
+    clearCart();
+  }, [clearProducts, clearCart]);
 
   useEffect(() => {
     if (id === "") {
@@ -19,7 +20,6 @@ const Home = (props) => {
     } else {
       setTimeout(() => {
         const element = document.getElementById(id);
-        console.log(element);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
@@ -50,6 +50,7 @@ const Home = (props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clearProducts: () => dispatch(clearProducts()),
+    clearCart: () => dispatch(clearCart()),
   };
 };
 

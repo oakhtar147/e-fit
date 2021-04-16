@@ -9,6 +9,13 @@ const populateCart = (cartProducts) => {
   };
 };
 
+const cartInteractionFailed = (error) => {
+  return {
+    type: actionTypes.CART_INTERACTION_FAILED,
+    error,
+  };
+};
+
 export const populateCartAsync = () => {
   return async (dispatch, getState) => {
     try {
@@ -19,7 +26,7 @@ export const populateCartAsync = () => {
       );
       dispatch(populateCart(cartProducts));
     } catch (err) {
-      console.log(err);
+      dispatch(cartInteractionFailed(err));
     }
   };
 };
@@ -41,7 +48,7 @@ export const addToCartAsync = (product) => {
       });
       dispatch(addToCart(product));
     } catch (err) {
-      console.log(err);
+      dispatch(cartInteractionFailed(err));
     }
   };
 };
@@ -56,12 +63,11 @@ const removeFromCart = (productId) => {
 export const removeFromCartAsync = (productId) => {
   return async (dispatch, getState) => {
     try {
-      const { idToken, localId: userId } = getState().auth;
-      const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`;
-      await axios.delete(`cart/${productId}.json/${queryParams}`);
+      const { idToken } = getState().auth;
+      await axios.delete(`cart/${productId}/?auth=${idToken}`);
       dispatch(removeFromCart(productId));
     } catch (err) {
-      console.log(err);
+      dispatch(cartInteractionFailed(err));
     }
   };
 };
@@ -74,13 +80,21 @@ const orderCartProducts = () => {
 
 export const orderCartProductsAsync = () => {
   return async (dispatch, getState) => {
-    const { idToken, localId: userId } = getState().auth;
-    const queryParams = `?auth=${idToken}&orderBy="userId"&equalTo="${userId}"`;
+    const { idToken } = getState().auth;
+    const { cartProducts } = getState().cart;
     try {
-      await axios.delete(`cart.json/${queryParams}`);
+      for (let productId in cartProducts) {
+        await axios.delete(`cart/${productId}.json/?auth=${idToken}`);
+      }
       dispatch(orderCartProducts());
     } catch (err) {
-      console.log(err);
+      dispatch(cartInteractionFailed(err));
     }
+  };
+};
+
+export const clearCart = () => {
+  return {
+    type: actionTypes.CLEAR_CART,
   };
 };

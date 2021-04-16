@@ -21,3 +21,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+@media (max-width: 500px) {
+  .Checkout Form {
+    max-width: 80%;
+  }
+}

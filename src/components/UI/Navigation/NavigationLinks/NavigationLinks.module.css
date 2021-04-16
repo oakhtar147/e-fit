@@ -1,0 +1,10 @@
+.NavigationLinks {
+  display: flex;
+}
+
+
+@media (max-width: 500px) {
+  .NavigationLinks {
+    flex-direction: column;
+  }
+}

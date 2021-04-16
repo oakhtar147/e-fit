@@ -9,6 +9,13 @@ const setProducts = (products) => {
   };
 };
 
+const getProductFailed = (error) => {
+  return {
+    type: actionTypes.SET_PRODUCT_FAILED,
+    error,
+  };
+};
+
 export const clearProducts = () => {
   return {
     type: actionTypes.CLEAR_PRODUCTS,
@@ -21,7 +28,7 @@ export const setProductsAsync = (category) => {
       const { data: products } = await axios.get(`products/${category}.json`);
       dispatch(setProducts(products));
     } catch (err) {
-      console.log(err);
+      dispatch(getProductFailed(err));
     }
   };
 };
@@ -47,7 +54,7 @@ export const getProductAsync = (category, productId) => {
       );
       dispatch(getProduct(product));
     } catch (err) {
-      console.log(err);
+      dispatch(getProductFailed(err));
     }
   };
 };

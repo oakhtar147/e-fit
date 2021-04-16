@@ -13,6 +13,13 @@ const userAuth = (idToken, localId) => {
   };
 };
 
+const authError = (error) => {
+  return {
+    type: actionTypes.AUTH_ERROR,
+    error,
+  };
+};
+
 export const userLogout = () => {
   localStorage.removeItem("idToken");
   localStorage.removeItem("localId");
@@ -45,7 +52,7 @@ export const userAuthAsync = (isLogin, email, password) => {
       dispatch(userAuth(idToken, localId));
       dispatch(authLogoutAsync(expiresIn));
     } catch (err) {
-      console.log(err);
+      dispatch(authError(err.response));
     }
   };
 };

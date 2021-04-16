@@ -14,6 +14,7 @@ import * as yup from "yup";
 import styles from "./Checkout.module.css";
 import Title from "components/UI/Title/Title";
 import Button from "components/UI/Button/Button";
+import Spinner from "components/UI/Spinner/Spinner";
 import { orderCartProductsAsync } from "store/actions/";
 
 const useStyles = makeStyles((theme) => ({
@@ -167,6 +168,7 @@ const Checkout = ({ orderCartProducts }) => {
             <Button type="submit" variant="success" disabled={isSubmitting}>
               Order Now
             </Button>
+            {isSubmitting && <Spinner />}
           </Form>
         )}
       </Formik>

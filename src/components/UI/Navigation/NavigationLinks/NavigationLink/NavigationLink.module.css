@@ -12,10 +12,20 @@
   transition: all 0.2s ease-in;
 }
 
+.NavigationLink {
+  list-style: none;
+}
+
 .NavigationLink:hover {
   border-bottom: 5px solid #F06418;
 }
 
 .NavigationLink .activeLink {
   color: #F06418;
+}
+
+@media (max-width: 500px) {
+  .NavigationLink a {
+    color: black;
+  }
 }

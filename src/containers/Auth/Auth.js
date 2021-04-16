@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import { TextField } from "@material-ui/core";
@@ -15,9 +15,25 @@ const Auth = (props) => {
   const { state } = props.location;
   const shouldFlashRedirectMessage = state && state.redirected;
 
+  useEffect(() => {
+    if (props.isAuthenticated) {
+      props.history.push(props.authRedirect);
+    }
+    // eslint-disable-next-line
+  }, [props.isAuthenticated]);
+
   const redirectFlashMessage = shouldFlashRedirectMessage && (
     <Alert severity="error" style={{ margin: "10px auto", width: "50%" }}>
       Please authenticate first!
+    </Alert>
+  );
+
+  const failedAuthMessage = props.error && (
+    <Alert
+      severity="error"
+      style={{ margin: "10px auto", width: "50%", textTransform: "capitalize" }}
+    >
+      {props.error.data.error.message.replaceAll("_", " ")}
     </Alert>
   );
 
@@ -30,11 +46,9 @@ const Auth = (props) => {
     setIsLogin(!isLogin);
   };
 
-  const authSubmit = (values, setSubmitting) => {
+  const authSubmit = (values, isSubmitting) => {
     const { email, password } = values;
     props.authenticate(isLogin, email, password);
-    setSubmitting(false);
-    props.history.replace(props.authRedirect);
   };
 
   const validationSchema = yup
@@ -58,18 +72,16 @@ const Auth = (props) => {
   return (
     <div className={styles.Login}>
       <Title>{isLogin ? "Log in " : "Sign up"}</Title>
-      {redirectFlashMessage}
+      {redirectFlashMessage || failedAuthMessage}
       <Formik
         initialValues={{
-          email: "osama@osama.com",
-          password: "osamaosama1!",
+          email: "",
+          password: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) =>
-          authSubmit(values, setSubmitting)
-        }
+        onSubmit={(values) => authSubmit(values)}
       >
-        {({ errors, isSubmitting }) => (
+        {({ errors }) => (
           <Form>
             <Field
               type="email"
@@ -80,7 +92,7 @@ const Auth = (props) => {
               required
               margin="normal"
               component={InputField}
-              error={errors.email}
+              error={!!errors.email}
               helperText={errors.email}
             />
             <Field
@@ -92,10 +104,14 @@ const Auth = (props) => {
               fullWidth
               margin="normal"
               component={InputField}
-              error={errors.password}
+              error={!!errors.password}
               helperText={errors.password}
             />
-            <Button variant="success" type="submit" disabled={isSubmitting}>
+            <Button
+              variant="success"
+              type="submit"
+              disabled={props.isAuthenticated}
+            >
               {isLogin ? "Log in" : "Sign up"}
             </Button>
             <p>
@@ -114,6 +130,8 @@ const Auth = (props) => {
 const mapStateToProps = (state) => {
   return {
     authRedirect: state.auth.authRedirect,
+    error: state.auth.error,
+    isAuthenticated: state.auth.idToken !== null,
   };
 };
 

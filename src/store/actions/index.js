@@ -12,6 +12,7 @@ export {
   addToCartAsync,
   removeFromCartAsync,
   orderCartProductsAsync,
+  clearCart,
 } from "./cart";
 
 export {

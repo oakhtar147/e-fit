@@ -12,3 +12,16 @@
   justify-content: flex-end;
 }
 
+.sideDrawer {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  .Navbar ul {
+    display: none;
+  }
+
+  .sideDrawer {
+    display: inherit; 
+  }
+}

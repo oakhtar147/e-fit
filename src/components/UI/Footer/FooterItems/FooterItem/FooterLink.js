@@ -3,7 +3,7 @@ import React from "react";
 const FooterLink = (props) => {
   return (
     <li>
-      <a href={props.link}>{props.site}</a>
+      <a href={props.link}>{props.siteLogo}</a>
     </li>
   );
 };

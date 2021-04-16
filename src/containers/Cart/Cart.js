@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import Alert from "@material-ui/lab/Alert";
+import axios from "axiosInstance";
 
 import styles from "./Cart.module.css";
 import Title from "components/UI/Title/Title";
@@ -8,10 +10,17 @@ import { populateCartAsync } from "store/actions/";
 import Spinner from "components/UI/Spinner/Spinner";
 import Button from "components/UI/Button/Button";
 import Checkout from "containers/Checkout/Checkout";
+import withErrorHandler from "hoc/withErrorHandler/withErrorHandler";
 
 const Cart = (props) => {
   const [showCheckout, setShowCheckout] = useState(false);
-  const { isAuthenticated, populateCart, cartProducts } = props;
+  const { isAuthenticated, populateCart, cartProducts, ordered } = props;
+
+  const orderSuccessfulFlashMessage = (
+    <Alert severity="success" style={{ margin: "10px auto", width: "50%" }}>
+      Your order has been successfully placed!
+    </Alert>
+  );
 
   useEffect(() => {
     isAuthenticated && populateCart();
@@ -36,20 +45,20 @@ const Cart = (props) => {
       >
         {products.length ? "Checkout" : "Cart is Empty"}
       </Button>
-      <Button
-        variant="success"
-        onClick={() => props.history.push({ pathname: "/", hash: "browse" })}
-      >
-        Browse Products
-      </Button>
     </>
   );
 
   return (
     <div className={styles.Cart}>
       <Title>My Cart</Title>
-      {renderElements || <Spinner />}
-      {showCheckout && <Checkout />}
+      {ordered ? orderSuccessfulFlashMessage : renderElements || <Spinner />}
+      {showCheckout && !ordered && <Checkout />}
+      <Button
+        variant="success"
+        onClick={() => props.history.push({ pathname: "/", hash: "browse" })}
+      >
+        Browse Products
+      </Button>
     </div>
   );
 };
@@ -57,7 +66,9 @@ const Cart = (props) => {
 const mapStateToProps = (state) => {
   return {
     cartProducts: state.cart.cartProducts,
+    ordered: state.cart.ordered,
     isAuthenticated: state.auth.idToken !== null,
+    error: state.cart.error,
   };
 };
 
@@ -67,4 +78,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withErrorHandler(Cart, axios));

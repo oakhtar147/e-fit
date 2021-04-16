@@ -8,12 +8,16 @@ const INITIAL_STATE = {
     quantity: 1,
     price: 0,
   },
+  error: null,
 };
 
 export const productReducer = produce((draft, action) => {
   switch (action.type) {
     case actionTypes.SET_PRODUCTS:
       draft.products = action.products;
+      break;
+    case actionTypes.SET_PRODUCT_FAILED:
+      draft.error = action.error;
       break;
     case actionTypes.CLEAR_PRODUCTS:
       draft.products = null;
@@ -24,7 +28,8 @@ export const productReducer = produce((draft, action) => {
       break;
     case actionTypes.GET_PRODUCT:
       draft.purchasingProduct.product = action.product;
-      draft.purchasingProduct.price = action.product.price;
+      draft.purchasingProduct.price =
+        draft.purchasingProduct.quantity * action.product.price;
       break;
     case actionTypes.INCREMENT_PRODUCT_QUANTITY:
       draft.purchasingProduct.quantity < 10 &&
